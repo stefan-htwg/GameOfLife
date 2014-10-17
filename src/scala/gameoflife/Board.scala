@@ -1,5 +1,7 @@
 
 
+package scala.gameoflife
+
 class Board(xDimension: Integer, yDimension: Integer) {
   def this() = this(3, 3)
 
@@ -9,19 +11,9 @@ class Board(xDimension: Integer, yDimension: Integer) {
   set(1)(1).isAlive = true
   set(2)(1).isAlive = true
 
-  def getBoardSet(x: Integer, y: Integer): Array[Array[Cell]] =
+  private def getBoardSet(x: Integer, y: Integer): Array[Array[Cell]] =
     {
       val newSet = Array.ofDim[Cell](x, y)
-
-      newSet(0)(0) = new Cell(0, 0)
-      newSet(1)(0) = new Cell(1, 0)
-      newSet(2)(0) = new Cell(2, 0)
-      newSet(0)(1) = new Cell(0, 1)
-      newSet(1)(1) = new Cell(1, 1)
-      newSet(2)(1) = new Cell(2, 1)
-      newSet(0)(2) = new Cell(0, 2)
-      newSet(1)(2) = new Cell(1, 2)
-      newSet(2)(2) = new Cell(2, 2)
 
       for (yOuter <- 0 until y; xInner <- 0 until x) {
         newSet(xInner)(yOuter) = new Cell(xInner, yOuter)
@@ -43,7 +35,7 @@ class Board(xDimension: Integer, yDimension: Integer) {
       set = newSet
     }
 
-  def getNeighborsCount(currentCell: Cell): Integer =
+  private def getNeighborsCount(currentCell: Cell): Integer =
     {
       var neighbors = 0
 
